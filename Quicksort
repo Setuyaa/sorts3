@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+
+void quicksort(int *mas, int n) {
+    int f = 0;
+    int l = n - 1;
+    int mid = mas[n / 2];
+    do{
+            while(mas[f] < mid) {
+                f++;
+            }
+            while(mas[l] > mid) {
+                l--;
+            }
+    
+        if (f <= l) {
+            int c = mas[f];
+            mas[f] = mas[l];
+            mas[l] = c;
+
+            f++;
+            l--;
+        }
+    } while (f <= l);
+    if(l > 0) {quicksort(mas, l+1);}
+    if (f < n) {quicksort(&mas[f], n-f);}
+}
+int main() {
+    int n;
+    cin >> n;
+    int *mas=new int[n];
+    srand(time(0));
+    for (int i=0;i<n;i++){
+        mas[i]=rand()%10+1;
+        cout << mas[i] << " ";
+    }
+    cout << endl;
+    quicksort(mas,n);
+    for (int i=0;i<n;i++){
+        cout << mas[i] << " ";
+    }
+    return 0;
+}
